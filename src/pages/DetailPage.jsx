@@ -34,10 +34,12 @@ function DetailPage() {
     return null;
   }
 
+  console.log({ talkDetail });
+
   return (
-    <section className='detail-page'>
+    <section className="detail-page">
       {talkDetail.parent && (
-        <div className='detail-page__parent'>
+        <div className="detail-page__parent">
           <h3>Replying To</h3>
           <TalkItem {...talkDetail.parent} authUser={authUser.id} />
         </div>

@@ -1,6 +1,7 @@
 /**
  * @TODO: Define all the actions (creator) for the authUser state
  */
+import { hideLoading, showLoading } from '@dimasmds/react-redux-loading-bar';
 import api from '../../utils/api';
 
 const ActionType = {
@@ -23,15 +24,18 @@ function unsetAuthUserActionCreator() {
   };
 }
 
-function asyncSetAuthUser({ id, password }) {
+function asyncSetAuthUser({ email, password }) {
   return async (dispatch) => {
+    dispatch(showLoading());
     try {
-      const token = await api.login({ id, password });
+      const token = await api.login({ email, password });
       api.putAccessToken(token);
       const authUser = await api.getOwnProfile();
       dispatch(setAuthUserActionCreator(authUser));
     } catch (error) {
       alert(error.message);
+    } finally {
+      dispatch(hideLoading());
     }
   };
 }

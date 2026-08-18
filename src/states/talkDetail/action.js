@@ -38,7 +38,7 @@ function asyncReceiveTalkDetail(talkId) {
     dispatch(clearTalkDetailActionCreator());
 
     try {
-      const talkDetail = await api.getTalkDetail(talkId);
+      const talkDetail = await api.getThreadDetail(talkId);
       dispatch(receiveTalkDetailActionCreator(talkDetail));
     } catch (error) {
       alert(error.message);

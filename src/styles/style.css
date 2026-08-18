@@ -16,11 +16,26 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: var(--foreground-color);
   background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+html {
+  height: 100%;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 160px;
 }
 
 .app-container {
-  max-width: 800px;
+  width: 60%;
   margin: 0 auto;
+  padding-bottom: 160px;
 }
 
 .loading {
@@ -51,7 +66,6 @@ body {
   gap: 16px;
   justify-content: center;
   flex-direction: column;
-  padding: 64px;
 }
 
 .login-page__main h2,
@@ -88,18 +102,21 @@ body {
 }
 
 .home-page {
-  width: 60%;
   padding-top: 50px;
+}
+
+.threads-area {
   margin: 0 auto;
+  display: flex;
+  gap: 20px;
 }
 
 .navigation {
-  padding: 6px;
   min-height: 55px;
   display: flex;
   gap: 16px;
   align-items: center;
-  padding: 0 12px;
+  padding: 12px 0;
 }
 
 .navigation img {
@@ -129,13 +146,14 @@ body {
 
 .talks-list {
   margin-bottom: 32px;
+  background: var(--background-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .talk-item {
   padding: 16px;
-  display: flex;
-  gap: 10px;
-  /* cursor: pointer; */
   border: 1px solid rgb(243, 243, 243);
   border-bottom: 0;
 }
@@ -149,7 +167,7 @@ body {
 } */
 
 .talk-item__user-photo img {
-  width: 40px;
+  width: 30px;
   border-radius: 50%;
   vertical-align: middle;
 }
@@ -164,6 +182,9 @@ body {
 }
 
 .talk-item__user-info {
+  display: flex;
+  gap: 4px;
+  align-items: center;
   flex: 1;
 }
 
@@ -182,8 +203,16 @@ body {
   color: var(--gray-dark-color);
 }
 
+.talk-item__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: pointer;
+}
+
 .talk-item__detail .talk-item__text {
-  font-size: 15px;
+  font-size: 25px;
+  color: var(--accent-color);
 }
 
 .talk-item__detail .talk-item__likes {
@@ -310,4 +339,247 @@ body {
   .register-page {
     grid-template-columns: 1.25fr 1fr;
   }
+}
+
+.topic {
+  padding: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  list-style-type: none;
+  border-radius: 4px;
+}
+
+.topic:hover {
+  background-color: var(--gray-light-color);
+}
+
+.topic.selected {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  border-radius: 4px;
+}
+
+.popular-topics {
+  width: 25%;
+  border: 0.2px solid #ccc;
+  border-radius: 8px;
+  padding: 12px;
+  height: fit-content;
+  background-color: var(--background-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.popular-topics h2 {
+  margin-bottom: 12px;
+}
+
+.talk-item__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+/* Footer Styles */
+footer {
+  width: fit-content;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  box-shadow:
+    0 -8px 25px rgba(0, 0, 0, 0.12),
+    0 -2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 16px 16px 0 0;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 60px;
+  background-color: var(--background-color);
+  border-top: 1px solid var(--gray-light-color);
+  z-index: 100;
+}
+
+.footer {
+  width: 100%;
+  max-width: 800px;
+}
+
+.footer__menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.footer__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--foreground-color);
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footer__link:hover {
+  color: var(--accent-color);
+}
+
+.footer__button {
+  padding: 0;
+}
+
+.footer__icon {
+  width: 24px;
+  height: 24px;
+  color: inherit;
+}
+
+.talk-item__actions button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.talk-item__actions button:hover {
+  color: #111827;
+}
+
+.talk-item__actions svg {
+  width: 16px;
+  height: 16px;
+}
+
+.talk-item__actions span {
+  line-height: 1;
+}
+
+/* Leaderboards Styles */
+.leaderboards-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.leaderboards-container {
+  width: 60%;
+  max-width: 800px;
+}
+
+.leaderboards-container h1 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--foreground-color);
+}
+
+.leaderboards-table {
+  background-color: var(--background-color);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.leaderboards-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: var(--gray-light-color);
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+.leaderboards-header__user {
+  flex: 1;
+  color: var(--gray-dark-color);
+}
+
+.leaderboards-header__score {
+  width: 80px;
+  text-align: right;
+  color: var(--gray-dark-color);
+}
+
+.leaderboards-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.leaderboards-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid rgb(243, 243, 243);
+  transition: background-color 0.2s ease;
+}
+
+.leaderboards-item:hover {
+  background-color: var(--gray-light-color);
+}
+
+.leaderboards-item:last-child {
+  border-bottom: none;
+}
+
+.leaderboards-item__rank {
+  width: 40px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--accent-color);
+  margin-right: 12px;
+}
+
+.leaderboards-item__user {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.leaderboards-item__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.leaderboards-item__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.leaderboards-item__name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--foreground-color);
+}
+
+.leaderboards-item__id {
+  font-size: 13px;
+  color: var(--gray-dark-color);
+}
+
+.leaderboards-item__score {
+  width: 80px;
+  text-align: right;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--foreground-color);
 }

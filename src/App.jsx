@@ -7,6 +7,8 @@ import HomePage from './pages/HomePage';
 import Navigation from './components/Navigation';
 import RegisterPage from './pages/RegisterPage';
 import DetailPage from './pages/DetailPage';
+import Leaderboards from './pages/Leaderboards';
+import Footer from './components/Footer';
 import { asyncPreloadProcess } from './states/isPreload/action';
 import { asyncUnsetAuthUser } from './states/authUser/action';
 
@@ -27,8 +29,6 @@ function App() {
     dispatch(asyncUnsetAuthUser());
   };
 
-  console.log({ authUser });
-
   if (isPreload) {
     return null;
   }
@@ -37,13 +37,20 @@ function App() {
     return (
       <>
         <Loading />
-        <main>
-          <Routes>
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/' element={<HomePage />} />
-            <Route path='/register' element={<RegisterPage />} />
-          </Routes>
-        </main>
+        <div className="app-container">
+          <main>
+            <Routes>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="/leaderboards" element={<Leaderboards />} />
+              <Route path="/discuss/:id" element={<DetailPage />} />
+            </Routes>
+          </main>
+          <footer>
+            <Footer authUser={authUser} signOut={onSignOut} />
+          </footer>
+        </div>
       </>
     );
   }
@@ -51,16 +58,17 @@ function App() {
   return (
     <>
       <Loading />
-      <div className='app-container'>
-        <header>
-          <Navigation authUser={authUser} signOut={onSignOut} />
-        </header>
+      <div className="app-container">
         <main>
           <Routes>
-            <Route path='/*' element={<HomePage />} />
-            <Route path='/talks/:id' element={<DetailPage />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/leaderboards" element={<Leaderboards />} />
+            <Route path="/discuss/:id" element={<DetailPage />} />
           </Routes>
         </main>
+        <footer>
+          <Footer authUser={authUser} signOut={onSignOut} />
+        </footer>
       </div>
     </>
   );

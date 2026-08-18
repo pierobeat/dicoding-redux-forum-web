@@ -19,15 +19,15 @@ const api = (() => {
     return localStorage.getItem('accessToken');
   }
 
-  async function register({ id, name, password }) {
-    const response = await fetch(`${BASE_URL}/users`, {
+  async function register({ name, email, password }) {
+    const response = await fetch(`${BASE_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id,
         name,
+        email,
         password,
       }),
     });
@@ -46,14 +46,14 @@ const api = (() => {
     return user;
   }
 
-  async function login({ id, password }) {
+  async function login({ email, password }) {
     const response = await fetch(`${BASE_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id,
+        email,
         password,
       }),
     });
@@ -109,7 +109,7 @@ const api = (() => {
     return users;
   }
 
-  async function getAllTalks() {
+  async function getAllThreads() {
     const response = await fetch(`${BASE_URL}/threads`);
 
     const responseJson = await response.json();
@@ -127,7 +127,7 @@ const api = (() => {
     return threads;
   }
 
-  async function getTalkDetail(id) {
+  async function getThreadDetail(id) {
     const response = await fetch(`${BASE_URL}/threads/${id}`);
 
     const responseJson = await response.json();
@@ -139,10 +139,10 @@ const api = (() => {
     }
 
     const {
-      data: { talkDetail },
+      data: { detailThread },
     } = responseJson;
 
-    return talkDetail;
+    return detailThread;
   }
 
   async function createTalk({ text, replyTo = '' }) {
@@ -192,6 +192,24 @@ const api = (() => {
     }
   }
 
+  async function getLeaderboards() {
+    const response = await fetch(`${BASE_URL}/leaderboards`);
+
+    const responseJson = await response.json();
+
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { leaderboards },
+    } = responseJson;
+
+    return leaderboards;
+  }
+
   return {
     putAccessToken,
     getAccessToken,
@@ -199,10 +217,11 @@ const api = (() => {
     login,
     getOwnProfile,
     getAllUsers,
-    getAllTalks,
+    getAllThreads,
     createTalk,
     toggleLikeTalk,
-    getTalkDetail,
+    getThreadDetail,
+    getLeaderboards,
   };
 })();
 

@@ -8,6 +8,7 @@ import isPreloadReducer from './isPreload/reducer';
 import talkDetailReducer from './talkDetail/reducer';
 import talksReducer from './talks/reducer';
 import usersReducer from './users/reducer';
+import leaderboardsReducer from './leaderboards/reducer';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     users: usersReducer,
     talks: talksReducer,
     talkDetail: talkDetailReducer,
+    leaderboards: leaderboardsReducer,
     loadingBar: loadingBarReducer,
   },
 });

@@ -32,7 +32,7 @@ function postedAt(date) {
   });
 }
 
-function truncateHtml(html, maxLength = 100) {
+function truncateHtml(html, maxLength = 300) {
   const text = convert(html, {
     wordwrap: false,
   }).trim();

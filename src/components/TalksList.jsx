@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TalkItem, { talkItemShape } from './TalkItem';
 
-function TalksList({ talks, like }) {
-  console.log({ talks });
-
+function TalksList({ talks, onLike }) {
   return (
-    <div className='talks-list'>
+    <div className="talks-list">
       {talks.map((talk) => (
-        <TalkItem key={talk.id} {...talk} like={like} />
+        <TalkItem key={talk.id} {...talk} onLike={onLike} />
       ))}
     </div>
   );
@@ -16,7 +14,7 @@ function TalksList({ talks, like }) {
 
 TalksList.propTypes = {
   talks: PropTypes.arrayOf(PropTypes.shape(talkItemShape)).isRequired,
-  like: PropTypes.func.isRequired,
+  onLike: PropTypes.func.isRequired,
 };
 
 export default TalksList;

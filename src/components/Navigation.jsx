@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function Navigation({ authUser, signOut }) {
-  const { id, photo, name } = authUser;
+  const { id, avatar, name } = authUser;
 
   return (
     <div className="navigation">
-      <img src={photo} alt={id} title={name} />
-      <nav>
+      <img src={avatar} alt={id} title={name} />
+      <p style={{ fontWeight: 600 }}>{name}</p>
+      {/* <nav>
         <Link to="/">Home</Link>
-      </nav>
-      <button type="button" onClick={signOut}>Sign out</button>
+      </nav> */}
+      {/* <button type="button" onClick={signOut}>Sign out</button> */}
     </div>
   );
 }
@@ -19,13 +20,11 @@ function Navigation({ authUser, signOut }) {
 const authUserShape = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
-
+  avatar: PropTypes.string.isRequired,
 };
 
 Navigation.propTypes = {
   authUser: PropTypes.shape(authUserShape).isRequired,
-  signOut: PropTypes.func.isRequired,
 };
 
 export default Navigation;
