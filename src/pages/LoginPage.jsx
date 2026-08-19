@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
-import { IoEarthOutline } from 'react-icons/io5';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import LoginInput from '../components/LoginInput';
 import { asyncSetAuthUser } from '../states/authUser/action';
 
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { authUser } = useSelector((states) => states);
 
-  const onLogin = ({ email, password }) => {
+  const onLogin = async ({ email, password }) => {
     // @TODO: dispatch async action to login
-    dispatch(asyncSetAuthUser({ email, password }));
-    navigate('/');
+    const isSuccess = await dispatch(asyncSetAuthUser({ email, password }));
+
+    if (isSuccess) {
+      navigate('/');
+    }
   };
 
   return (

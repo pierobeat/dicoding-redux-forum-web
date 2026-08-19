@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
-function Navigation({ authUser, signOut }) {
+function Navigation({ authUser }) {
   const { id, avatar, name } = authUser;
 
   return (

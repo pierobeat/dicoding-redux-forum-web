@@ -9,14 +9,20 @@ function talksReducer(talks = [], action = {}) {
       return action.payload.talks;
     case ActionType.ADD_TALK:
       return [action.payload.talk, ...talks];
-    case ActionType.TOGGLE_LIKE_TALK:
+    case ActionType.VOTE_TALK:
       return talks.map((talk) => {
         if (talk.id === action.payload.talkId) {
+          const { userId, voteType } = action.payload;
           return {
             ...talk,
-            likes: talk.likes.includes(action.payload.userId)
-              ? talk.likes.filter((id) => id !== action.payload.userId)
-              : talk.likes.concat([action.payload.userId]),
+            upVotesBy: talk.upVotesBy.filter((id) => id !== userId),
+            downVotesBy: talk.downVotesBy.filter((id) => id !== userId),
+            ...(voteType === 1 && {
+              upVotesBy: talk.upVotesBy.concat([userId]),
+            }),
+            ...(voteType === -1 && {
+              downVotesBy: talk.downVotesBy.concat([userId]),
+            }),
           };
         }
         return talk;

@@ -105,6 +105,60 @@ main {
   padding-top: 50px;
 }
 
+.create-thread-page {
+  padding: 50px 0;
+}
+
+.create-thread-page__main {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.create-thread-page h1 {
+  margin-bottom: 24px;
+  color: var(--accent-color);
+}
+
+.create-thread-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.create-thread-form input,
+.create-thread-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  border: 1px solid var(--gray-dark-color);
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.create-thread-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.create-thread-form button {
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 8px;
+  background-color: var(--accent-color);
+  color: white;
+  font:
+    600 16px 'Open Sans',
+    sans-serif;
+  cursor: pointer;
+}
+
+.create-thread-form__actions button:first-child {
+  background-color: var(--gray-dark-color);
+}
+
 .threads-area {
   margin: 0 auto;
   display: flex;
@@ -449,15 +503,10 @@ footer {
   padding: 0;
   border: none;
   background: transparent;
-  color: #6b7280;
+  color: black;
   font-size: 14px;
   cursor: pointer;
 }
-
-.talk-item__actions button:hover {
-  color: #111827;
-}
-
 .talk-item__actions svg {
   width: 16px;
   height: 16px;
@@ -582,4 +631,13 @@ footer {
   font-weight: 600;
   font-size: 16px;
   color: var(--foreground-color);
+}
+
+.input-wrapper {
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  margin-bottom: 12px;
 }

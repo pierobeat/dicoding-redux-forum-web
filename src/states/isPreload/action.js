@@ -28,6 +28,8 @@ function asyncPreloadProcess() {
       dispatch(setAuthUserActionCreator(authUser));
     } catch (error) {
       // fallback process
+      console.error(error);
+
       dispatch(setAuthUserActionCreator(null));
     } finally {
       // end preload process

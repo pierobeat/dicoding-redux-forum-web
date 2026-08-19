@@ -41,7 +41,7 @@ function truncateHtml(html, maxLength = 300) {
     return text;
   }
 
-  return text.slice(0, maxLength).trimEnd() + '...';
+  return `${text.slice(0, maxLength).trimEnd()}...`;
 }
 
 export { postedAt, truncateHtml };

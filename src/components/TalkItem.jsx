@@ -14,9 +14,15 @@ function TalkItem({
   downVotesBy,
   totalComments,
   user,
+  onVote,
 }) {
   const { authUser } = useSelector((states) => states);
   const navigate = useNavigate();
+
+  const isUpvoted = authUser ? upVotesBy.includes(authUser.id) : false;
+  const isDownvoted = authUser ? downVotesBy.includes(authUser.id) : false;
+
+  console.log({ upVotesBy, downVotesBy, authUser });
 
   const isUserLogin = authUser !== null;
 
@@ -28,6 +34,11 @@ function TalkItem({
     if (event.key === 'Enter' || event.key === ' ') {
       navigate(isUserLogin ? `/discuss/${id}` : '/login');
     }
+  };
+
+  const onVoteClick = (event, voteType) => {
+    event.stopPropagation();
+    onVote(id, voteType);
   };
 
   return (
@@ -56,12 +67,25 @@ function TalkItem({
         </article>
 
         <div className="talk-item__actions">
-          <button type="button" aria-label="upvote">
+          <button
+            type="button"
+            aria-label="upvote"
+            onClick={(event) => onVoteClick(event, 1)}
+            style={{ fontWeight: 600, color: isUpvoted ? 'green' : 'inherit' }}
+          >
             <FaRegThumbsUp />
             <span>{upVotesBy.length}</span>
           </button>
 
-          <button type="button" aria-label="downvote">
+          <button
+            type="button"
+            aria-label="downvote"
+            onClick={(event) => onVoteClick(event, -1)}
+            style={{
+              fontWeight: 600,
+              color: isDownvoted ? 'green' : 'inherit',
+            }}
+          >
             <FaRegThumbsDown />
             <span>{downVotesBy.length}</span>
           </button>
@@ -91,6 +115,7 @@ const talkItemShape = {
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   totalComments: PropTypes.number.isRequired,
   user: PropTypes.shape(userShape).isRequired,
+  onVote: PropTypes.func.isRequired,
 };
 
 TalkItem.propTypes = talkItemShape;

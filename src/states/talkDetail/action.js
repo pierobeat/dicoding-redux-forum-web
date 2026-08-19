@@ -1,12 +1,13 @@
 /**
  * @TODO: Define all the actions (creator) for the talkDetail state
  */
+import { hideLoading, showLoading } from '@dimasmds/react-redux-loading-bar';
 import api from '../../utils/api';
 
 const ActionType = {
   RECEIVE_TALK_DETAIL: 'RECEIVE_TALK_DETAIL',
   CLEAR_TALK_DETAIL: 'CLEAR_TALK_DETAIL',
-  TOGGLE_LIKE_TALK_DETAIL: 'TOGGLE_LIKE_TALK_DETAIL',
+  VOTE_TALK_DETAIL: 'VOTE_TALK_DETAIL',
 };
 
 function receiveTalkDetailActionCreator(talkDetail) {
@@ -24,37 +25,62 @@ function clearTalkDetailActionCreator() {
   };
 }
 
-function toggleLikeTalkDetailActionCreator(userId) {
+function voteTalkDetailActionCreator({ userId, voteType }) {
   return {
-    type: ActionType.TOGGLE_LIKE_TALK_DETAIL,
+    type: ActionType.VOTE_TALK_DETAIL,
     payload: {
       userId,
+      voteType,
     },
   };
 }
 
 function asyncReceiveTalkDetail(talkId) {
   return async (dispatch) => {
-    dispatch(clearTalkDetailActionCreator());
-
+    dispatch(showLoading());
     try {
+      dispatch(clearTalkDetailActionCreator());
+
       const talkDetail = await api.getThreadDetail(talkId);
       dispatch(receiveTalkDetailActionCreator(talkDetail));
     } catch (error) {
       alert(error.message);
+    } finally {
+      dispatch(hideLoading());
     }
   };
 }
 
-function asyncToogleLikeTalkDetail() {
+function asyncVoteTalkDetail(talkId, voteType) {
   return async (dispatch, getState) => {
     const { authUser, talkDetail } = getState();
-    dispatch(toggleLikeTalkDetailActionCreator(authUser.id));
+    const previousVoteType = talkDetail.upVotesBy.includes(authUser.id)
+      ? 1
+      : talkDetail.downVotesBy.includes(authUser.id)
+        ? -1
+        : 0;
+    const nextVoteType = previousVoteType === voteType ? 0 : voteType;
 
+    dispatch(showLoading());
     try {
-      await api.toggleLikeTalk(talkDetail.id);
+      dispatch(
+        voteTalkDetailActionCreator({
+          userId: authUser.id,
+          voteType: nextVoteType,
+        }),
+      );
+
+      await api.voteTalk(talkId, nextVoteType);
     } catch (error) {
       alert(error.message);
+      dispatch(
+        voteTalkDetailActionCreator({
+          userId: authUser.id,
+          voteType: previousVoteType,
+        }),
+      );
+    } finally {
+      dispatch(hideLoading());
     }
   };
 }
@@ -63,7 +89,7 @@ export {
   ActionType,
   receiveTalkDetailActionCreator,
   clearTalkDetailActionCreator,
-  toggleLikeTalkDetailActionCreator,
+  voteTalkDetailActionCreator,
+  asyncVoteTalkDetail,
   asyncReceiveTalkDetail,
-  asyncToogleLikeTalkDetail,
 };

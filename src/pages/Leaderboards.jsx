@@ -1,20 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { asyncPopulateUsersAndTalks } from '../states/shared/action';
+import { asyncPopulateLeaderboards } from '../states/leaderboards/action';
 
 function Leaderboards() {
   const { leaderboards = [] } = useSelector((states) => states);
   const dispatch = useDispatch();
+  const hasFetched = useRef(false);
 
   useEffect(() => {
-    dispatch(asyncPopulateUsersAndTalks());
+    if (hasFetched.current) return;
+
+    hasFetched.current = true;
+    dispatch(asyncPopulateLeaderboards());
   }, [dispatch]);
 
   return (
     <div className="leaderboards-page">
       <div className="leaderboards-container">
         <h1>Klasmen Pengguna Aktif</h1>
-        
+
         <div className="leaderboards-table">
           <div className="leaderboards-header">
             <div className="leaderboards-header__user">Pengguna</div>
@@ -26,13 +30,15 @@ function Leaderboards() {
               <div key={item.user.id} className="leaderboards-item">
                 <div className="leaderboards-item__rank">{index + 1}</div>
                 <div className="leaderboards-item__user">
-                  <img 
-                    src={item.user.avatar} 
+                  <img
+                    src={item.user.avatar}
                     alt={item.user.name}
                     className="leaderboards-item__avatar"
                   />
                   <div className="leaderboards-item__info">
-                    <div className="leaderboards-item__name">{item.user.name}</div>
+                    <div className="leaderboards-item__name">
+                      {item.user.name}
+                    </div>
                     <div className="leaderboards-item__id">@{item.user.id}</div>
                   </div>
                 </div>

@@ -6,12 +6,14 @@ import App from './App';
 import store from './states';
 
 import './styles/style.css';
+import Loading from './components/Loading';
 
 const root = createRoot(document.getElementById('root'));
 
 // TODO: wrap App with store provider
 root.render(
   <Provider store={store}>
+    <Loading />
     <BrowserRouter>
       <StrictMode>
         <App />

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import TalkInput from '../components/TalkInput';
 import TalksList from '../components/TalksList';
 import { asyncPopulateUsersAndTalks } from '../states/shared/action';
-import { asyncAddTalk, asyncToogleLikeTalk } from '../states/talks/action';
+import { asyncVoteTalk } from '../states/talks/action';
 import Navigation from '../components/Navigation';
 
 function HomePage() {
@@ -31,14 +30,13 @@ function HomePage() {
     dispatch(asyncPopulateUsersAndTalks());
   }, [dispatch]);
 
-  const onAddTalk = (text) => {
-    // @TODO: dispatch async action to add talk
-    dispatch(asyncAddTalk({ text }));
-  };
+  // const onAddTalk = (text) => {
+  //   // @TODO: dispatch async action to add talk
+  //   dispatch(asyncAddTalk({ text }));
+  // };
 
-  const onLike = (id) => {
-    // @TODO: dispatch async action to toggle like talk
-    dispatch(asyncToogleLikeTalk(id));
+  const onVote = (id, voteType) => {
+    dispatch(asyncVoteTalk(id, voteType));
   };
 
   const onFilterTopic = (topic) => {
@@ -58,16 +56,14 @@ function HomePage() {
       )}
       <div className="threads-area">
         <div style={{ width: '75%' }}>
-          <TalksList talks={talkList} onLike={onLike} />
+          <TalksList talks={talkList} onVote={onVote} />
         </div>
         <div className="popular-topics">
           <h2>Kategori Populer</h2>
           <ul>
             {topics.map((topic) => (
               <li
-                className={
-                  'topic' + (selectedTopic === topic ? ' selected' : '')
-                }
+                className={`topic ${selectedTopic === topic ? 'selected' : ''}`}
                 key={topic}
                 onClick={() => onFilterTopic(topic)}
               >

@@ -6,9 +6,9 @@ import TalkItem from '../components/TalkItem';
 import TalkReplyInput from '../components/TalkReplyInput';
 import {
   asyncReceiveTalkDetail,
-  asyncToogleLikeTalkDetail,
+  asyncVoteTalkDetail,
 } from '../states/talkDetail/action';
-import { asyncAddTalk } from '../states/talks/action';
+import { asyncAddTalk, asyncVoteTalk } from '../states/talks/action';
 
 function DetailPage() {
   const { id } = useParams();
@@ -20,9 +20,8 @@ function DetailPage() {
     dispatch(asyncReceiveTalkDetail(id));
   }, [id, dispatch]);
 
-  const onLikeTalk = () => {
-    // @TODO: dispatch async action to toggle like talk detail
-    dispatch(asyncToogleLikeTalkDetail());
+  const onVoteTalk = (voteType) => {
+    dispatch(asyncVoteTalkDetail(id, voteType));
   };
 
   const onReplyTalk = (text) => {
@@ -41,14 +40,15 @@ function DetailPage() {
       {talkDetail.parent && (
         <div className="detail-page__parent">
           <h3>Replying To</h3>
-          <TalkItem {...talkDetail.parent} authUser={authUser.id} />
+          <TalkItem
+            {...talkDetail.parent}
+            onVote={(talkId, voteType) =>
+              dispatch(asyncVoteTalk(talkId, voteType))
+            }
+          />
         </div>
       )}
-      <TalkDetail
-        {...talkDetail}
-        authUser={authUser.id}
-        likeTalk={onLikeTalk}
-      />
+      <TalkDetail {...talkDetail} authUser={authUser.id} onVote={onVoteTalk} />
       <TalkReplyInput replyTalk={onReplyTalk} />
     </section>
   );

@@ -13,8 +13,7 @@ function Footer({ authUser, signOut }) {
   const navigate = useNavigate();
 
   const handleAddThread = () => {
-    // Navigate to add thread page or open modal
-    navigate('/');
+    navigate('/create-thread');
   };
 
   return (

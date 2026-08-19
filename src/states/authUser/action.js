@@ -32,8 +32,10 @@ function asyncSetAuthUser({ email, password }) {
       api.putAccessToken(token);
       const authUser = await api.getOwnProfile();
       dispatch(setAuthUserActionCreator(authUser));
+      return true;
     } catch (error) {
       alert(error.message);
+      return false;
     } finally {
       dispatch(hideLoading());
     }
@@ -42,8 +44,13 @@ function asyncSetAuthUser({ email, password }) {
 
 function asyncUnsetAuthUser() {
   return (dispatch) => {
-    dispatch(unsetAuthUserActionCreator());
-    api.putAccessToken('');
+    dispatch(showLoading());
+    try {
+      dispatch(unsetAuthUserActionCreator());
+      api.putAccessToken('');
+    } finally {
+      dispatch(hideLoading());
+    }
   };
 }
 
