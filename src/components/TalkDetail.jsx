@@ -1,54 +1,56 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { postedAt } from '../utils';
+import VoteButtons from './VoteButtons';
 
-function TalkDetail({ text, createdAt, upVotesBy, downVotesBy, user, onVote }) {
+function TalkDetail({
+  title,
+  body,
+  category,
+  createdAt,
+  owner,
+  upVotesBy,
+  downVotesBy,
+  onVote,
+}) {
   return (
     <section className="talk-detail">
-      <header>
-        <img src={user.photo} alt={user} />
-        <div className="talk-detail__user-info">
-          <p className="talk-detail__user-name">{user.name}</p>
-          <p className="talk-detail__user-id">@{user.id}</p>
+      <span className="talk-detail__category">#{category}</span>
+      <header style={{ display: 'flex', marginTop: '20px' }}>
+        <div className="talk-item__user-info">
+          <div className="talk-item__user-photo">
+            <img src={owner.avatar} alt={owner.name} />
+          </div>
+          <p className="talk-item__user-name">{owner.name}</p>
         </div>
+
+        <p className="talk-item__created-at">{postedAt(createdAt)}</p>
       </header>
-      <article>
-        <p className="talk-detail__text">{text}</p>
-      </article>
-      <footer>
-        <div className="talk-detail__like">
-          <button type="button" aria-label="upvote" onClick={() => onVote(1)}>
-            <FaRegHeart />
-          </button>
-          <span>{upVotesBy.length} Upvotes</span>
-          <button
-            type="button"
-            aria-label="downvote"
-            onClick={() => onVote(-1)}
-          >
-            <FaHeart />
-          </button>
-          <span>{downVotesBy.length} Downvotes</span>
-        </div>
-        <p className="talk-detail__created-at">{postedAt(createdAt)}</p>
-      </footer>
+      <h1 className="talk-detail__title">{title}</h1>
+      <p className="talk-detail__body">{body}</p>
+      <VoteButtons
+        upVotesBy={upVotesBy}
+        downVotesBy={downVotesBy}
+        onVote={onVote}
+      />
     </section>
   );
 }
 
-const userShape = {
+const ownerShape = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
 };
 
 TalkDetail.propTypes = {
-  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
   downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
-  user: PropTypes.shape(userShape).isRequired,
+  owner: PropTypes.shape(ownerShape).isRequired,
   onVote: PropTypes.func.isRequired,
 };
 

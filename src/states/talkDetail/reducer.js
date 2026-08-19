@@ -24,6 +24,33 @@ function talkDetailReducer(talkDetail = null, action = {}) {
         }),
       };
     }
+    case ActionType.ADD_COMMENT:
+      return {
+        ...talkDetail,
+        comments: [...talkDetail.comments, action.payload.comment],
+      };
+    case ActionType.VOTE_COMMENT: {
+      const { commentId, userId, voteType } = action.payload;
+
+      return {
+        ...talkDetail,
+        comments: talkDetail.comments.map((comment) => {
+          if (comment.id !== commentId) return comment;
+
+          return {
+            ...comment,
+            upVotesBy: comment.upVotesBy.filter((id) => id !== userId),
+            downVotesBy: comment.downVotesBy.filter((id) => id !== userId),
+            ...(voteType === 1 && {
+              upVotesBy: comment.upVotesBy.concat([userId]),
+            }),
+            ...(voteType === -1 && {
+              downVotesBy: comment.downVotesBy.concat([userId]),
+            }),
+          };
+        }),
+      };
+    }
     default:
       return talkDetail;
   }

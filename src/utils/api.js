@@ -195,6 +195,32 @@ const api = (() => {
     return thread;
   }
 
+  async function createComment(threadId, content) {
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/comments`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ content }),
+      },
+    );
+
+    const responseJson = await response.json();
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+
+    const {
+      data: { comment },
+    } = responseJson;
+
+    return comment;
+  }
+
   async function voteTalk(id, voteType) {
     const votePaths = {
       1: 'up-vote',
@@ -209,6 +235,26 @@ const api = (() => {
 
     const responseJson = await response.json();
 
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
+      throw new Error(message);
+    }
+  }
+
+  async function voteComment(threadId, commentId, voteType) {
+    const votePaths = {
+      1: 'up-vote',
+      0: 'neutral-vote',
+      '-1': 'down-vote',
+    };
+
+    const response = await _fetchWithAuth(
+      `${BASE_URL}/threads/${threadId}/comments/${commentId}/${votePaths[voteType]}`,
+      { method: 'POST' },
+    );
+
+    const responseJson = await response.json();
     const { status, message } = responseJson;
 
     if (status !== 'success') {
@@ -244,7 +290,9 @@ const api = (() => {
     getAllThreads,
     createTalk,
     createThread,
+    createComment,
     voteTalk,
+    voteComment,
     getThreadDetail,
     getLeaderboards,
   };

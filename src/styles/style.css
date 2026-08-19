@@ -326,8 +326,9 @@ main {
 }
 
 .detail-page {
-  width: 90%;
+  width: min(92%, 960px);
   margin: 0 auto;
+  padding: 36px 0 120px;
 }
 
 .detail-page__parent {
@@ -339,53 +340,108 @@ main {
 }
 
 .talk-detail {
-  margin-top: 32px;
+  margin-top: 16px;
+  padding: 28px 0;
 }
 
-.talk-detail header {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-  align-items: center;
-}
-
-.talk-detail header img {
-  width: 80px;
-  border-radius: 50%;
-}
-
-.talk-detail__user-info {
-  font-size: 20px;
-}
-
-.talk-detail__user-name {
+.talk-detail__category {
+  display: inline-block;
+  padding: 7px 12px;
+  border: 1px solid var(--gray-dark-color);
+  border-radius: 6px;
+  color: var(--foreground-color);
   font-weight: 600;
 }
 
-.talk-detail__text {
+.talk-detail__title {
+  margin: 20px 0 12px;
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.15;
+}
+
+.talk-detail__body {
   font-size: 20px;
+  line-height: 1.6;
+  white-space: pre-wrap;
 }
 
-.talk-detail footer {
-  margin-top: 32px;
+.talk-detail__meta {
   display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  color: var(--gray-dark-color);
+  font-size: 16px;
 }
 
-.talk-detail__like {
-  flex: 1;
+.talk-detail__votes {
   display: flex;
-  gap: 10px;
+  gap: 16px;
+  margin-top: 20px;
 }
 
-.talk-detail__like button {
-  background-color: transparent;
+.talk-detail__votes button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
   border: 0;
-  font-size: 24px;
+  background: transparent;
+  color: var(--foreground-color);
+  font-size: 18px;
   cursor: pointer;
 }
 
+.comments-section {
+  margin-top: 40px;
+}
+
+.comments-section h2,
+.talk-reply-input h2 {
+  margin-bottom: 18px;
+  font-size: 24px;
+}
+
 .talk-reply-input {
-  margin-top: 32px;
+  margin-top: 8px;
+}
+
+.talk-reply-input textarea {
+  height: 130px;
+  border: 1px solid var(--gray-dark-color);
+  border-radius: 5px;
+}
+
+.comment-item {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--gray-light-color);
+}
+
+.comment-item__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.comment-item__owner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.comment-item__owner img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.comment-item__header time {
+  color: var(--gray-dark-color);
+}
+
+.comment-item__content {
+  margin: 18px 0;
+  line-height: 1.5;
 }
 
 @media screen and (min-width: 850px) {

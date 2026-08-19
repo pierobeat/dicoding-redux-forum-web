@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import TalkDetail from '../components/TalkDetail';
 import TalkItem from '../components/TalkItem';
@@ -7,13 +7,23 @@ import TalkReplyInput from '../components/TalkReplyInput';
 import {
   asyncReceiveTalkDetail,
   asyncVoteTalkDetail,
+  asyncAddComment,
+  asyncVoteComment,
 } from '../states/talkDetail/action';
-import { asyncAddTalk, asyncVoteTalk } from '../states/talks/action';
+import { asyncVoteTalk } from '../states/talks/action';
+import CommentItem from '../components/CommentItem';
 
 function DetailPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { talkDetail = null, authUser } = useSelector((states) => states); // @TODO: get talkDetail and authUser state from store
   const dispatch = useDispatch(); // @TODO: get dispatch function from store
+
+  useEffect(() => {
+    if (!authUser) {
+      navigate('/');
+    }
+  }, authUser);
 
   useEffect(() => {
     // @TODO: dispatch async action to get talk detail by id
@@ -24,16 +34,17 @@ function DetailPage() {
     dispatch(asyncVoteTalkDetail(id, voteType));
   };
 
-  const onReplyTalk = (text) => {
-    // @TODO: dispatch async action to add reply talk
-    dispatch(asyncAddTalk({ text, replyTo: id }));
+  const onReplyTalk = (content) => {
+    return dispatch(asyncAddComment(id, content));
+  };
+
+  const onVoteComment = (commentId, voteType) => {
+    dispatch(asyncVoteComment(id, commentId, voteType));
   };
 
   if (!talkDetail) {
     return null;
   }
-
-  console.log({ talkDetail });
 
   return (
     <section className="detail-page">
@@ -48,8 +59,18 @@ function DetailPage() {
           />
         </div>
       )}
-      <TalkDetail {...talkDetail} authUser={authUser.id} onVote={onVoteTalk} />
+      <TalkDetail {...talkDetail} onVote={onVoteTalk} />
       <TalkReplyInput replyTalk={onReplyTalk} />
+      <section className="comments-section">
+        <h2>Komentar ({talkDetail.comments.length})</h2>
+        {talkDetail.comments.map((comment) => (
+          <CommentItem
+            key={comment.id}
+            comment={comment}
+            onVote={onVoteComment}
+          />
+        ))}
+      </section>
     </section>
   );
 }

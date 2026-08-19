@@ -1,34 +1,33 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 
 function TalkReplyInput({ replyTalk }) {
   const [text, setText] = useState('');
-  const navigate = useNavigate('/');
-
-  function replyTalkHandler() {
-    if (text.trim()) {
-      replyTalk(text);
+  async function replyTalkHandler(event) {
+    event.preventDefault();
+    if (text.trim() && (await replyTalk(text.trim()))) {
       setText('');
-      navigate('/');
     }
   }
 
-  function handleTextChange({ target }) {
-    if (target.value.length <= 320) {
-      setText(target.value);
-    }
-  }
+  // function handleTextChange({ target }) {
+  //   if (target.value.length <= 320) {
+  //     setText(target.value);
+  //   }
+  // }
 
   return (
-    <div className="talk-reply-input">
-      <textarea type="text" placeholder="Talk your reply" value={text} onChange={handleTextChange} />
-      <p className="talk-reply-input__char-left">
-        <strong>{text.length}</strong>
-        /320
-      </p>
-      <button type="submit" onClick={replyTalkHandler}>Reply</button>
-    </div>
+    <form className="talk-reply-input" onSubmit={replyTalkHandler}>
+      <h2>Beri komentar</h2>
+      <textarea
+        placeholder="Tulis komentar..."
+        value={text}
+        onChange={({ target }) => setText(target.value)}
+        maxLength="320"
+      />
+      <p className="talk-reply-input__char-left">{text.length}/320</p>
+      <button type="submit">Kirim</button>
+    </form>
   );
 }
 

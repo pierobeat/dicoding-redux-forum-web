@@ -22,7 +22,7 @@ function TalkItem({
   const isUpvoted = authUser ? upVotesBy.includes(authUser.id) : false;
   const isDownvoted = authUser ? downVotesBy.includes(authUser.id) : false;
 
-  console.log({ upVotesBy, downVotesBy, authUser });
+  // console.log({ upVotesBy, downVotesBy, authUser });
 
   const isUserLogin = authUser !== null;
 

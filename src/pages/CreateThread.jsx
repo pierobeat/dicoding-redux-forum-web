@@ -13,8 +13,8 @@ function CreateThread() {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    if (!title.trim() || !body.trim()) {
-      alert('Title and body are required');
+    if (!title.trim() || !body.trim() || !category.trim()) {
+      alert('all inputs are required');
       return;
     }
 
