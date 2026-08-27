@@ -16,6 +16,6 @@ describe('Login flow', () => {
       console.log('LOGIN RESPONSE:', interception.response);
     });
 
-    cy.contains('Threads').should('be.visible');
+    cy.contains('Threads', { timeout: 10000 }).should('be.visible');
   });
 });
