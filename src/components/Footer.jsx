@@ -13,7 +13,7 @@ function Footer({ authUser, signOut }) {
   const navigate = useNavigate();
 
   const handleAddThread = () => {
-    navigate('/create-thread');
+    navigate('/create-discussion');
   };
 
   return (
@@ -21,7 +21,7 @@ function Footer({ authUser, signOut }) {
       <nav className="footer__menu">
         <Link to="/" className="footer__link">
           <FiMessageCircle className="footer__icon" />
-          <span>Threads</span>
+          <span>Discussions</span>
         </Link>
 
         <Link to="/leaderboards" className="footer__link">
@@ -36,7 +36,7 @@ function Footer({ authUser, signOut }) {
             onClick={handleAddThread}
           >
             <FiPlus className="footer__icon" />
-            <span>Add Thread</span>
+            <span>Add Discussion</span>
           </button>
         )}
 

@@ -32,10 +32,10 @@ function CreateThread() {
   };
 
   return (
-    <section className="create-thread-page">
-      <div className="create-thread-page__main">
+    <section className="create-discussion-page">
+      <div className="create-discussion-page__main">
         <h1>Buat Diskusi</h1>
-        <form className="create-thread-form" onSubmit={onSubmit}>
+        <form className="create-discussion-form" onSubmit={onSubmit}>
           <label htmlFor="thread-title">Judul</label>
           <input
             id="thread-title"
@@ -64,11 +64,11 @@ function CreateThread() {
             rows="8"
           />
 
-          <div className="create-thread-form__actions">
+          <div className="create-discussion-form__actions">
             <button type="button" onClick={() => navigate(-1)}>
               Cancel
             </button>
-            <button type="submit">Create Thread</button>
+            <button type="submit">Create Discussion</button>
           </div>
         </form>
       </div>

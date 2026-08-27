@@ -68,8 +68,8 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/leaderboards" element={<Leaderboards />} />
-            <Route path="/create-thread" element={<CreateThread />} />
-            <Route path="/create-thread" element={<CreateThread />} />
+            <Route path="/create-discussion" element={<CreateThread />} />
+            <Route path="/create-discussion" element={<CreateThread />} />
             <Route path="/discuss/:id" element={<DetailPage />} />
           </Routes>
         </main>

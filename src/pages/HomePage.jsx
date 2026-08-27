@@ -4,11 +4,13 @@ import TalksList from '../components/TalksList';
 import { asyncPopulateUsersAndTalks } from '../states/shared/action';
 import { asyncVoteTalk } from '../states/talks/action';
 import Navigation from '../components/Navigation';
+import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
   const { talks = [], users = [], authUser } = useSelector((states) => states); // @TODO: get talks, users, and authUser state from store
 
   const dispatch = useDispatch(); // @TODO: get dispatch function from store
+  const navigate = useNavigate();
 
   const allTalks = talks.map((talk) => ({
     ...talk,
@@ -34,6 +36,11 @@ function HomePage() {
   // };
 
   const onVote = (id, voteType) => {
+    if (!authUser) {
+      navigate('/login');
+      return;
+    }
+
     dispatch(asyncVoteTalk(id, voteType));
   };
 
