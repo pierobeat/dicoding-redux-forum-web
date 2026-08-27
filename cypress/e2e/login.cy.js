@@ -16,6 +16,6 @@ describe('Login flow', () => {
       console.log('LOGIN RESPONSE:', interception.response);
     });
 
-    cy.url().should('not.include', '/login');
+    cy.contains('Threads').should('be.visible');
   });
 });
