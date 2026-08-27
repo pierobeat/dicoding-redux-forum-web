@@ -130,19 +130,23 @@ function asyncVoteComment(threadId, commentId, voteType) {
 
     dispatch(showLoading());
     try {
-      dispatch(voteCommentActionCreator({
-        commentId,
-        userId: authUser.id,
-        voteType: nextVoteType,
-      }));
+      dispatch(
+        voteCommentActionCreator({
+          commentId,
+          userId: authUser.id,
+          voteType: nextVoteType,
+        }),
+      );
       await api.voteComment(threadId, commentId, nextVoteType);
     } catch (error) {
       alert(error.message);
-      dispatch(voteCommentActionCreator({
-        commentId,
-        userId: authUser.id,
-        voteType: previousVoteType,
-      }));
+      dispatch(
+        voteCommentActionCreator({
+          commentId,
+          userId: authUser.id,
+          voteType: previousVoteType,
+        }),
+      );
     } finally {
       dispatch(hideLoading());
     }

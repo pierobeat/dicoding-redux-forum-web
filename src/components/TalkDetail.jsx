@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { postedAt } from '../utils';
+import { postedAt, truncateHtml } from '../utils';
 import VoteButtons from './VoteButtons';
 
 function TalkDetail({
@@ -27,7 +27,7 @@ function TalkDetail({
         <p className="talk-item__created-at">{postedAt(createdAt)}</p>
       </header>
       <h1 className="talk-detail__title">{title}</h1>
-      <p className="talk-detail__body">{body}</p>
+      <p className="talk-detail__body">{truncateHtml(body)}</p>
       <VoteButtons
         upVotesBy={upVotesBy}
         downVotesBy={downVotesBy}

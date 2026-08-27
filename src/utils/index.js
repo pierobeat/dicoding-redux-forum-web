@@ -32,12 +32,12 @@ function postedAt(date) {
   });
 }
 
-function truncateHtml(html, maxLength = 300) {
+function truncateHtml(html, maxLength = 0) {
   const text = convert(html, {
     wordwrap: false,
   }).trim();
 
-  if (text.length <= maxLength) {
+  if (text.length <= maxLength || maxLength == 0) {
     return text;
   }
 

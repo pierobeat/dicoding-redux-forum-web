@@ -8,8 +8,6 @@ import Navigation from '../components/Navigation';
 function HomePage() {
   const { talks = [], users = [], authUser } = useSelector((states) => states); // @TODO: get talks, users, and authUser state from store
 
-  // console.log({ authUser });
-
   const dispatch = useDispatch(); // @TODO: get dispatch function from store
 
   const allTalks = talks.map((talk) => ({

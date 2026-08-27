@@ -4,8 +4,6 @@ import { postedAt } from '../utils';
 import VoteButtons from './VoteButtons';
 
 function CommentItem({ comment, onVote }) {
-  console.log({ comment });
-
   return (
     <article className="comment-item">
       <header className="comment-item__header">

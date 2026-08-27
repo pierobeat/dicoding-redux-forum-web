@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading from './components/Loading';
 import LoginPage from './pages/LoginPage';
@@ -17,15 +17,18 @@ function App() {
     (states) => states,
   );
 
+  const location = useLocation();
+  const userAccessPage = ['/login', '/register'];
+
+  const hideFooter = userAccessPage.includes(location?.pathname);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // @TODO: dispatch async action to preload app
     dispatch(asyncPreloadProcess());
   }, [dispatch]);
 
   const onSignOut = () => {
-    // @TODO: dispatch async action to sign out
     dispatch(asyncUnsetAuthUser());
   };
 
@@ -47,9 +50,11 @@ function App() {
               <Route path="/discuss/:id" element={<DetailPage />} />
             </Routes>
           </main>
-          <footer>
-            <Footer authUser={authUser} signOut={onSignOut} />
-          </footer>
+          {!hideFooter && (
+            <footer>
+              <Footer authUser={authUser} signOut={onSignOut} />
+            </footer>
+          )}
         </div>
       </>
     );

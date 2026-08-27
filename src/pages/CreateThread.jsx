@@ -36,7 +36,7 @@ function CreateThread() {
       <div className="create-thread-page__main">
         <h1>Buat Diskusi</h1>
         <form className="create-thread-form" onSubmit={onSubmit}>
-          <label htmlFor="thread-title">judul</label>
+          <label htmlFor="thread-title">Judul</label>
           <input
             id="thread-title"
             type="text"
@@ -44,7 +44,7 @@ function CreateThread() {
             onChange={(event) => setTitle(event.target.value)}
           />
 
-          <label htmlFor="thread-category">kategori</label>
+          <label htmlFor="thread-category">Kategori</label>
           <div className="input-wrapper">
             <span className="input-adornment-start">#</span>
             <input
@@ -56,7 +56,7 @@ function CreateThread() {
             />
           </div>
 
-          <label htmlFor="thread-body">isi</label>
+          <label htmlFor="thread-body">Isi</label>
           <textarea
             id="thread-body"
             value={body}

@@ -10,12 +10,6 @@ function TalkReplyInput({ replyTalk }) {
     }
   }
 
-  // function handleTextChange({ target }) {
-  //   if (target.value.length <= 320) {
-  //     setText(target.value);
-  //   }
-  // }
-
   return (
     <form className="talk-reply-input" onSubmit={replyTalkHandler}>
       <h2>Beri komentar</h2>
