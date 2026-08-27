@@ -41,8 +41,6 @@ function TalkItem({
     onVote(id, voteType);
   };
 
-  console.log({ body });
-
   return (
     <div className="talk-item">
       <div className="talk-item__detail">

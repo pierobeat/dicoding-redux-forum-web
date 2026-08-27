@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FieldError } from './FieldError';
+import FieldError from './FieldError';
 
 const loginSchema = z.object({
   email: z.email('Invalid email'),

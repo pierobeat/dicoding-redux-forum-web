@@ -13,8 +13,8 @@ import api from '../utils/api';
 
 describe('talksReducer function', () => {
   const talks = [
-    { id: 'talk-1', text: 'Hello' },
-    { id: 'talk-2', text: 'World' },
+    { id: 'thread-1', text: 'Hello' },
+    { id: 'thread-2', text: 'World' },
   ];
   it('should RECEIVE_TALKS', () => {
     const action = {
@@ -26,7 +26,7 @@ describe('talksReducer function', () => {
   });
 
   it('should ADD_TALK', () => {
-    const newTalk = { id: 'talk-3', text: 'World' };
+    const newTalk = { id: 'thread-3', text: 'World' };
 
     const action = {
       type: TalksActionType.ADD_TALK,
@@ -36,7 +36,9 @@ describe('talksReducer function', () => {
     expect(talksReducer(talks, action)).toEqual([newTalk, ...talks]);
   });
 
-  // THUNK ADD TALK
+  /**
+   * TESTING THUNK FUNCTION
+   */
   it('should alert error message when create talk fails', async () => {
     const dispatch = vi.fn();
 
@@ -59,11 +61,11 @@ describe('talksReducer function', () => {
 
     const getState = vi.fn(() => ({
       authUser: {
-        id: 'user-1',
+        id: 'users-1',
       },
       talks: [
         {
-          id: 'talk-1',
+          id: 'thread-1',
           upVotesBy: [],
           downVotesBy: [],
         },
@@ -72,33 +74,34 @@ describe('talksReducer function', () => {
 
     vi.spyOn(api, 'voteTalk').mockResolvedValue();
 
-    await asyncVoteTalk('talk-1', 1)(dispatch, getState);
+    await asyncVoteTalk('thread-1', 1)(dispatch, getState);
 
-    expect(api.voteTalk).toHaveBeenCalledWith('talk-1', 1);
+    expect(api.voteTalk).toHaveBeenCalledWith('thread-1', 1);
 
     expect(dispatch).toHaveBeenCalledWith({
       type: TalksActionType.VOTE_TALK,
       payload: {
-        talkId: 'talk-1',
-        userId: 'user-1',
+        talkId: 'thread-1',
+        userId: 'users-1',
         voteType: 1,
       },
     });
   });
+  // =======================================
 });
 
 describe('leaderboardsReducer function', () => {
   const leaderboards = [
     {
       user: {
-        id: 'user-1',
+        id: 'users-1',
         name: 'user1',
       },
       score: 10,
     },
     {
       user: {
-        id: 'user-2',
+        id: 'users-2',
         name: 'user2',
       },
       score: 5,

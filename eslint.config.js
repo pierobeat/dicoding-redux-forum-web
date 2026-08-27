@@ -1,3 +1,6 @@
+// For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
+import storybook from "eslint-plugin-storybook";
+
 import globals from 'globals';
 import { fixupPluginRules } from '@eslint/compat';
 import pluginJs from '@eslint/js';
@@ -28,4 +31,5 @@ export default [
       'react/jsx-props-no-spreading': 'off',
     },
   },
+  ...storybook.configs["flat/recommended"]
 ];
