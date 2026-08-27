@@ -29,12 +29,12 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "latest",
+    "@chromatic-com/storybook": "5.3.0",
     "@eslint/compat": "^1.4.0",
     "@eslint/js": "^9.36.0",
     "@storybook/addon-a11y": "^10.5.10",
     "@storybook/addon-docs": "^10.5.10",
-    "@storybook/addon-mcp": "latest",
+    "@storybook/addon-mcp": "0.7.0",
     "@storybook/addon-onboarding": "^10.5.10",
     "@storybook/addon-vitest": "^10.5.10",
     "@storybook/react-vite": "^10.5.10",
@@ -56,10 +56,13 @@
     "eslint-plugin-storybook": "^10.5.10",
     "globals": "^16.4.0",
     "jsdom": "29.0.1",
-    "playwright": "latest",
+    "playwright": "1.62.1",
     "start-server-and-test": "^3.0.12",
     "storybook": "^10.5.10",
     "vite": "^8.2.2",
     "vitest": "^4.1.11"
+  },
+  "overrides": {
+    "aria-query": "^5.3.2"
   }
 }

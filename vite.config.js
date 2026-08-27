@@ -16,6 +16,7 @@ const dirname =
 export default defineConfig({
   plugins: [react()],
   test: {
+    exclude: ['**/node_modules/**', 'src/stories/**'],
     projects: [
       {
         extends: true,
@@ -46,7 +47,7 @@ export default defineConfig({
           },
           server: {
             deps: {
-              inline: ['aria-query', '@storybook/addon-vitest'],
+              inline: ['aria-query'],
             },
           },
         },
