@@ -22,21 +22,25 @@ function asyncPreloadProcess() {
   return async (dispatch) => {
     dispatch(showLoading());
 
+    const token = api.getAccessToken();
+
+    if (!token) {
+      dispatch(setAuthUserActionCreator(null));
+      dispatch(setIsPreloadActionCreator(false));
+      dispatch(hideLoading());
+      return;
+    }
+
     try {
-      // preload process
       const authUser = await api.getOwnProfile();
       dispatch(setAuthUserActionCreator(authUser));
     } catch (error) {
-      // fallback process
       console.error(error);
-
       dispatch(setAuthUserActionCreator(null));
     } finally {
-      // end preload process
       dispatch(setIsPreloadActionCreator(false));
+      dispatch(hideLoading());
     }
-
-    dispatch(hideLoading());
   };
 }
 
