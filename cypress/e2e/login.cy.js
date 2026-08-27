@@ -8,6 +8,6 @@ describe('Login flow', () => {
 
     cy.contains('button', /^Login$/).click();
 
-    cy.url().should('not.include', '/login');
+    cy.get('.home-page').should('be.visible');
   });
 });
