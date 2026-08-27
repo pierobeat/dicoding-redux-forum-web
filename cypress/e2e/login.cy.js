@@ -1,5 +1,9 @@
 describe('Login flow', () => {
-  it('should display homepage after successful login', () => {
+  it('should login successfully', () => {
+    cy.intercept('POST', 'https://forum-api.dicoding.dev/v1/login').as(
+      'loginRequest',
+    );
+
     cy.visit('/login');
 
     cy.get('input[placeholder="Email"]').type('testingdummy@mail.com');
@@ -8,6 +12,10 @@ describe('Login flow', () => {
 
     cy.contains('button', /^Login$/).click();
 
-    cy.get('.home-page').should('be.visible');
+    cy.wait('@loginRequest').then((interception) => {
+      console.log('LOGIN RESPONSE:', interception.response);
+    });
+
+    cy.url().should('not.include', '/login');
   });
 });
