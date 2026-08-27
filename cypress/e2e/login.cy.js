@@ -1,6 +1,6 @@
 describe('Login flow', () => {
   it('should login successfully', () => {
-    cy.visit('http://localhost:5173/login');
+    cy.visit('/login');
 
     cy.get('input[placeholder="Email"]').type('testingdummy@mail.com');
 
