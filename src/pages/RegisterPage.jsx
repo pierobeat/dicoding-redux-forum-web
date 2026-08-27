@@ -21,6 +21,7 @@ function RegisterPage() {
 
   return (
     <section className="register-page">
+      <div className="right-triangle" />
       <article className="register-page__main">
         <h2>Create your account</h2>
         <RegisterInput register={onRegister} />
@@ -29,6 +30,7 @@ function RegisterPage() {
           Already have an account? <Link to="/login">Login</Link>
         </p>
       </article>
+      <div className="left-triangle" />
     </section>
   );
 }

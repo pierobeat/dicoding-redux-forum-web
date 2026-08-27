@@ -19,6 +19,7 @@ function LoginPage() {
 
   return (
     <section className="login-page">
+      <div className="right-triangle" />
       <article className="login-page__main">
         <h2>
           See <strong>The World</strong>, <br />
@@ -30,8 +31,8 @@ function LoginPage() {
           Don&apos;t have an account? <Link to="/register">Register</Link>
         </p>
       </article>
+      <div className="left-triangle" />
     </section>
   );
 }
-
 export default LoginPage;

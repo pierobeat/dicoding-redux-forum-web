@@ -12,7 +12,7 @@ body {
 }
 
 :root {
-  --accent-color: #0049e7;
+  --accent-color: #0b8db9;
   --foreground-color: #0f1419;
   --background-color: white;
   --gray-dark-color: #66757f;
@@ -712,4 +712,26 @@ footer {
 
 label {
   font-weight: 600;
+}
+
+.right-triangle {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 0;
+  right: 0;
+  background-color: var(--accent-color);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  z-index: -1;
+}
+
+.left-triangle {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent-color);
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+  z-index: -1;
 }
