@@ -44,13 +44,6 @@ main {
   margin: 0 auto;
 }
 
-@media (max-width: 1500px) {
-  .app-container {
-    width: 80%;
-    margin: 0 auto;
-  }
-}
-
 .loading {
   position: sticky;
   top: 0;
@@ -745,4 +738,86 @@ label {
   background-color: var(--accent-color);
   clip-path: polygon(0 0, 0 100%, 100% 100%);
   z-index: -1;
+}
+
+@media (max-width: 1500px) {
+  .app-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .detail-page {
+    width: min(75%, 960px);
+    margin: 0 auto;
+    padding: 36px 0 120px;
+  }
+
+  /* --- TAMBAHAN AGAR BAGUS DI 1440 (SAYA PAKAI AI UNTUK INI) --- */
+
+  .login-page__hero,
+  .register-page__hero {
+    font-size: 100px;
+  }
+
+  .login-page__main h2,
+  .register-page h2 {
+    font-size: 36px;
+  }
+
+  .leaderboards-container h1 {
+    font-size: 26px;
+  }
+
+  .talk-detail__title {
+    font-size: clamp(24px, 5vw, 32px);
+  }
+
+  .talk-item__detail .talk-item__text {
+    font-size: 20px;
+  }
+
+  .talk-detail__body {
+    font-size: 16px;
+  }
+
+  .comments-section h2,
+  .talk-reply-input h2 {
+    font-size: 20px;
+  }
+
+  .login-input input,
+  .register-input input,
+  .login-input button,
+  .register-input button,
+  .create-discussion-form input,
+  .create-discussion-form textarea,
+  .create-discussion-form button,
+  .navigation button,
+  .talk-detail__meta,
+  .leaderboards-item__rank,
+  .leaderboards-item__score {
+    font-size: 14px;
+  }
+
+  .talk-item__detail .talk-item__created-at,
+  .talk-item__detail .talk-item__user-name,
+  .talk-item__detail .talk-item__user-id,
+  .talk-item__likes p,
+  .talk-input textarea,
+  .talk-reply-input textarea,
+  .talk-input button,
+  .talk-reply-input button,
+  .talk-input__char-left,
+  .talk-reply-input__char-left,
+  .topic,
+  .leaderboards-item__name {
+    font-size: 13px;
+  }
+
+  .footer__link,
+  .talk-item__actions button,
+  .leaderboards-header,
+  .leaderboards-item__id {
+    font-size: 12px;
+  }
 }

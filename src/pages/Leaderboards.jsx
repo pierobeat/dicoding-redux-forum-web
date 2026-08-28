@@ -17,7 +17,7 @@ function Leaderboards() {
   return (
     <div className="leaderboards-page">
       <div className="leaderboards-container">
-        <h1>Klasmen Pengguna Aktif</h1>
+        <h1>Klasemen Pengguna Aktif</h1>
 
         <div className="leaderboards-table">
           <div className="leaderboards-header">
