@@ -23,7 +23,7 @@ function DetailPage() {
     if (!authUser) {
       navigate('/');
     }
-  }, authUser);
+  }, [authUser, navigate]);
 
   useEffect(() => {
     // @TODO: dispatch async action to get talk detail by id
