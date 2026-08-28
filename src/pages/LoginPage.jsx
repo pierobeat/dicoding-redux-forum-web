@@ -22,7 +22,7 @@ function LoginPage() {
       <div className="right-triangle" />
       <article className="login-page__main">
         <h2>
-          See <strong>The World</strong>, <br />
+          See <strong>The Brain</strong>, <br />
           Through Open-Space.
         </h2>
 
