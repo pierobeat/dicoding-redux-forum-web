@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { postedAt } from '../utils';
+import { postedAt, truncateHtml } from '../utils';
 import VoteButtons from './VoteButtons';
 
 function CommentItem({ comment, onVote }) {
@@ -13,7 +13,9 @@ function CommentItem({ comment, onVote }) {
         </div>
         <time>{postedAt(comment.createdAt)}</time>
       </header>
-      <p className="comment-item__content">{comment.content}</p>
+      <p className="comment-item__content">
+        {truncateHtml(comment.content, 0)}
+      </p>
       <VoteButtons
         upVotesBy={comment.upVotesBy}
         downVotesBy={comment.downVotesBy}
